@@ -1,6 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import Wather from './Weather.css';
 
 const WeatherApp = () => {
   const [city, setCity] = useState('');
@@ -8,7 +9,7 @@ const WeatherApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_KEY = 'fd453e05fcc64b5786e04442232411'; // Replace with your actual API key from https://www.weatherapi.com/
+  const API_KEY = 'fd453e05fcc64b5786e04442232411'; 
 
   const handleSearch = async () => {
     if (!city) return;
