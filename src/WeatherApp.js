@@ -1,6 +1,5 @@
 // src/App.js
 import React, { useState } from 'react';
-import axios from 'axios';
 import './Weather.css';
 
 const WeatherApp = () => {
@@ -21,9 +20,10 @@ const WeatherApp = () => {
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
       );
 
-      if (response.status >= 200 && response.status < 300) {
+      if (response.ok) {
         const data = await response.json();
         setWeatherData(data);
+        setError(null); // Clear any previous error on successful response
       } else {
         throw new Error('Failed to fetch weather data');
       }
@@ -34,6 +34,7 @@ const WeatherApp = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div>
