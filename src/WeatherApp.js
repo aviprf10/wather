@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import Wather from './Weather.css';
+import './Weather.css';  // Assuming your CSS file is named Weather.css
 
 const WeatherApp = () => {
   const [city, setCity] = useState('');
@@ -9,26 +9,24 @@ const WeatherApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_KEY = 'fd453e05fcc64b5786e04442232411'; 
+  const API_KEY = 'fd453e05fcc64b5786e04442232411';  // Replace with your actual WeatherAPI key
 
   const handleSearch = async () => {
     if (!city) return;
-  
+
     setLoading(true);
     try {
-        const response = await axios.get(
-          `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
-        );
-        setWeatherData(response.data);
-      } catch (error) {
-        //console.error('Error fetching weather data:', error);
-        setError('Failed to fetch weather data');
-        alert('Failed to fetch weather data');
-      } finally {
-        setLoading(false);
-      }
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
+      );
+      setWeatherData(response.data);
+    } catch (error) {
+      setError('Failed to fetch weather data');
+      alert('Failed to fetch weather data');
+    } finally {
+      setLoading(false);
+    }
   };
-  
 
   return (
     <div>
@@ -37,7 +35,7 @@ const WeatherApp = () => {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        />
+      />
       <button onClick={handleSearch}>Search</button>
 
       {loading && <p>Loading data...</p>}
