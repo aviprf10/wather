@@ -15,11 +15,19 @@ const WeatherApp = () => {
     if (!city) return;
 
     setLoading(true);
+
     try {
-      const response = await axios.get(
+      const response = await fetch(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
       );
-      setWeatherData(response.data);
+
+      if (!response.ok) {
+        // Check if the response status is not in the range 200-299 (HTTP success status)
+        throw new Error('Failed to fetch weather data');
+      }
+
+      const data = await response.json();
+      setWeatherData(data);
     } catch (error) {
       setError('Failed to fetch weather data');
       alert('Failed to fetch weather data');
