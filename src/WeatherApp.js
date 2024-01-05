@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Weather.css';  // Assuming your CSS file is named Weather.css
+import './Weather.css';
 
 const WeatherApp = () => {
   const [city, setCity] = useState('');
@@ -9,7 +9,7 @@ const WeatherApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_KEY = 'fd453e05fcc64b5786e04442232411';  // Replace with your actual WeatherAPI key
+  const API_KEY = 'fd453e05fcc64b5786e04442232411';
 
   const handleSearch = async () => {
     if (!city) return;
@@ -30,23 +30,32 @@ const WeatherApp = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Enter city name"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Enter city name"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="search-input"
+        />
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
+      </div>
 
       {loading && <p>Loading data...</p>}
 
       {weatherData && (
-        <div className="weather-card">
-          <p>Temperature: {weatherData.current.temp_c}°C</p>
-          <p>Humidity: {weatherData.current.humidity}%</p>
-          <p>Condition: {weatherData.current.condition.text}</p>
-          <p>Wind Speed: {weatherData.current.wind_kph} km/h</p>
-        </div>
+        <div className="center-container">
+          <div className="weather-container">
+          
+              <div  className="weather-card"><b>Temperature<br/></b> {weatherData.current.temp_c}°C</div>
+              <div  className="weather-card"><b>Humidity<br/></b> {weatherData.current.humidity}%</div>
+              <div  className="weather-card"><b>Condition<br/></b> {weatherData.current.condition.text}</div>
+              <div  className="weather-card"><b>Wind Speed<br/></b>  {weatherData.current.wind_kph} km/h</div>
+          
+          </div>
+        </div>  
       )}
 
       {error && <p>{error}</p>}
